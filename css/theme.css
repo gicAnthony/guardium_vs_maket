@@ -308,7 +308,7 @@ body.has-toolbar #game-container {
 #compare-table-wrap {
   position: absolute;
   inset: 0;
-  background: var(--navy-100);
+  background: var(--white);
   z-index: 20;
   overflow: auto;
   padding: 28px 36px 40px;
@@ -376,7 +376,7 @@ body.has-toolbar #game-container {
   min-width: 168px;
 }
 
-#compare-table tbody tr:nth-child(even) td { background: var(--paper); }
+#compare-table tbody tr:nth-child(even) td { background: var(--navy-100); }
 
 #compare-table tbody td.is-guardium {
   background: rgba(245, 166, 35, 0.08);

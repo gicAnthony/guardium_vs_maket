@@ -4,7 +4,7 @@
   --navy-900: #0b2545;
   --navy-800: #122c52;
   --navy-700: #14406b;
-  --navy-100: #0b2545;
+  --navy-100: #e7edf5;
   --orange-500: #f5a623;
   --orange-600: #e08e00;
   --ink-muted: #5b6b7f;
@@ -41,7 +41,7 @@ html, body {
   z-index: 51;
   font-size: 11px;
   letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(4, 40, 155, 0.75);
   text-transform: uppercase;
 }
 

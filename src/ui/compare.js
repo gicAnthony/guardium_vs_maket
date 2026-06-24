@@ -62,15 +62,21 @@ window.VA_COMPARE = (function () {
     const sections = content.FEATURE_SECTIONS || [{ title: "", rows: content.TABLE_ROWS }];
     const cols = [guardium, ...competitors.filter((v) => selected.has(v.key))];
     const table = document.getElementById("compare-table");
+    const contrastStart = "Authorization & Policy";
+    const contrastEnd = "Developer Experience";
+    let useSectionContrast = false;
 
     const thead = "<thead><tr><th>Capability</th>" + cols.map((v) =>
       '<th><span class="th-dot" style="background:' + v.colorHex + '"></span>' + v.name + "</th>"
     ).join("") + "</tr></thead>";
 
     const tbody = "<tbody>" + sections.map((section) => {
+      if (section.title === contrastStart) useSectionContrast = true;
+      const sectionClass = useSectionContrast ? "section-row section-row-contrast" : "section-row";
       const sectionRow = section.title
-        ? '<tr class="section-row"><td colspan="' + (cols.length + 1) + '">' + section.title + "</td></tr>"
+        ? '<tr class="' + sectionClass + '"><td colspan="' + (cols.length + 1) + '">' + section.title + "</td></tr>"
         : "";
+      if (section.title === contrastEnd) useSectionContrast = false;
       const rows = section.rows.map((r) =>
         "<tr><td class=\"row-label\">" + r.label + "</td>" +
         cols.map((v) => "<td class=\"" + (v.pinned ? "is-guardium" : "") + "\">" + r[v.key] + "</td>").join("") +

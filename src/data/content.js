@@ -208,34 +208,6 @@ window.VA_CONTENT = (function () {
     },
   ];
 
-  const EVIDENCE_SCREENSHOTS = [
-    {
-      src: "screenshots/Screenshot%202026-05-15%20134316.png",
-      alt: "Guardium and Descope overview, workflow builder, and authentication method comparison",
-      caption: "Overview, workflow builder, and authentication methods",
-    },
-    {
-      src: "screenshots/Screenshot%202026-05-15%20134343.png",
-      alt: "Guardium and Descope authentication, authorization, and risk comparison",
-      caption: "Authentication, authorization, and risk",
-    },
-    {
-      src: "screenshots/Screenshot%202026-05-15%20134409.png",
-      alt: "Guardium and Descope risk, secrets, audit, compliance, and provisioning comparison",
-      caption: "Risk, secrets, audit, compliance, and provisioning",
-    },
-    {
-      src: "screenshots/Screenshot%202026-05-15%20134438.png",
-      alt: "Guardium and Descope audit, enterprise, and developer experience comparison",
-      caption: "Audit, enterprise, and developer experience",
-    },
-    {
-      src: "screenshots/Screenshot%202026-05-15%20134459.png",
-      alt: "Guardium and Descope developer experience and final win-loss notes",
-      caption: "Developer experience and win-loss notes",
-    },
-  ];
-
   const FEATURE_SECTIONS = [
     { title: "Executive Summary", rows: TABLE_ROWS },
     {
@@ -721,5 +693,5 @@ window.VA_CONTENT = (function () {
     },
   };
 
-  return { AXES, VENDORS, CATEGORY_DETAIL, TABLE_ROWS, FEATURE_SECTIONS, EVIDENCE_SCREENSHOTS, ROADMAP, BRIEFING, DIAGRAMS };
+  return { AXES, VENDORS, CATEGORY_DETAIL, TABLE_ROWS, FEATURE_SECTIONS, ROADMAP, BRIEFING, DIAGRAMS };
 })();

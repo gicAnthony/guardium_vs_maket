@@ -82,24 +82,10 @@ window.VA_COMPARE = (function () {
     table.innerHTML = thead + tbody;
   }
 
-  function renderEvidence() {
-    const wrap = document.getElementById("compare-evidence");
-    if (!wrap || !content.EVIDENCE_SCREENSHOTS) return;
-
-    wrap.innerHTML =
-      '<div class="evidence-head"><span>Source captures</span><small>Guardium vs Descope feature notes from /screenshots</small></div>' +
-      '<div class="evidence-grid">' +
-      content.EVIDENCE_SCREENSHOTS.map((shot) =>
-        '<figure><img src="' + shot.src + '" alt="' + shot.alt + '" loading="lazy" /><figcaption>' + shot.caption + "</figcaption></figure>"
-      ).join("") +
-      "</div>";
-  }
-
   function show() {
     document.body.classList.add("has-toolbar");
     document.getElementById("compare-table-wrap").classList.toggle("visible", viewMode === "table");
     renderTable();
-    renderEvidence();
   }
 
   function hide() {
@@ -114,7 +100,6 @@ window.VA_COMPARE = (function () {
 
   buildChips();
   buildViewSwitch();
-  renderEvidence();
 
   return {
     show,

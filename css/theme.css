@@ -1,0 +1,574 @@
+:root {
+  --white: #ffffff;
+  --paper: #f5f7fa;
+  --navy-900: #0b2545;
+  --navy-800: #122c52;
+  --navy-700: #14406b;
+  --navy-100: #e7edf5;
+  --orange-500: #f5a623;
+  --orange-600: #e08e00;
+  --ink-muted: #5b6b7f;
+  --success: #2e9e6b;
+  --danger: #d6453d;
+  --topbar-height: 30px;
+  --nav-height: 60px;
+  --toolbar-height: 58px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--white);
+  color: var(--navy-900);
+  font-family: "Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ---------- Dark navy info bar (echoes corporate header) ---------- */
+
+#topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--topbar-height);
+  background: var(--navy-900);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 51;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.75);
+  text-transform: uppercase;
+}
+
+#topbar .dots {
+  display: flex;
+  gap: 5px;
+}
+
+#topbar .dots span {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--orange-500);
+  opacity: 0.5;
+}
+#topbar .dots span:nth-child(1) { opacity: 1; }
+
+/* ---------- Main nav ---------- */
+
+#topnav {
+  position: fixed;
+  top: var(--topbar-height); left: 0; right: 0;
+  height: var(--nav-height);
+  background: var(--white);
+  border-bottom: 1px solid var(--navy-100);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 50;
+}
+
+#topnav .wordmark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+#topnav .wordmark .mark {
+  width: 30px; height: 30px;
+  flex-shrink: 0;
+}
+
+#topnav .wordmark .text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+#topnav .wordmark .text strong {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--navy-900);
+}
+
+#topnav .wordmark .text small {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
+
+#topnav nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#topnav nav button {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--ink-muted);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+#topnav nav button:hover {
+  color: var(--navy-900);
+  background: var(--paper);
+}
+
+#topnav nav button.active {
+  color: var(--orange-600);
+  background: var(--navy-100);
+}
+
+#topnav .cta {
+  appearance: none;
+  border: none;
+  background: var(--orange-500);
+  color: var(--navy-900);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+  box-shadow: 0 6px 16px rgba(245, 166, 35, 0.35);
+}
+
+#topnav .cta:hover {
+  background: var(--orange-600);
+  transform: translateY(-1px);
+}
+
+/* ---------- Compare toolbar (filter chips + view switch) ---------- */
+/* Only shown while the Arena/Compare scene is active, toggled via the
+   body.has-toolbar class so #game-container's offset shifts to make room. */
+
+#compare-toolbar {
+  position: fixed;
+  top: calc(var(--topbar-height) + var(--nav-height));
+  left: 0; right: 0;
+  height: var(--toolbar-height);
+  background: var(--white);
+  border-bottom: 1px solid var(--navy-100);
+  z-index: 45;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+body.has-toolbar #compare-toolbar { display: flex; }
+
+body.has-toolbar #game-container {
+  top: calc(var(--topbar-height) + var(--nav-height) + var(--toolbar-height));
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ft-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-muted);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* "Tap here" affordance: a small pulsing hotspot that signals the chips
+   next to it are clickable, since plain pill buttons aren't always read
+   as interactive at a glance. */
+.tap-indicator {
+  position: relative;
+  width: 16px; height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tap-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--orange-500);
+}
+
+.tap-ring {
+  position: absolute;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--orange-500);
+  animation: tap-pulse 1.6s ease-out infinite;
+}
+
+@keyframes tap-pulse {
+  0% { transform: scale(0.45); opacity: 0.9; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+#compare-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.vendor-chip {
+  appearance: none;
+  border: 1.5px solid var(--navy-100);
+  background: var(--white);
+  border-radius: 999px;
+  padding: 6px 14px 6px 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+
+.vendor-chip .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.vendor-chip.active { color: var(--navy-900); }
+.vendor-chip:not(.active) { opacity: 0.55; }
+.vendor-chip:not(.active) .dot { opacity: 0.6; }
+
+.view-switch {
+  display: flex;
+  gap: 2px;
+  background: var(--paper);
+  border-radius: 9px;
+  padding: 3px;
+}
+
+.view-switch button {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--ink-muted);
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 7px 16px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.view-switch button:hover { color: var(--navy-900); }
+
+.view-switch button.active {
+  color: var(--navy-900);
+  background: var(--white);
+  box-shadow: 0 1px 4px rgba(11, 37, 69, 0.12);
+}
+
+/* ---------- Game container ---------- */
+
+#game-container {
+  position: fixed;
+  top: calc(var(--topbar-height) + var(--nav-height));
+  left: 0; right: 0; bottom: 0;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: top 0.2s ease;
+}
+
+#game-container canvas {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* ---------- DOM comparison table (default Arena/Compare view) ---------- */
+
+#compare-table-wrap {
+  position: absolute;
+  inset: 0;
+  background: var(--white);
+  z-index: 20;
+  overflow: auto;
+  padding: 28px 36px 40px;
+  display: none;
+}
+
+#compare-table-wrap.visible { display: block; }
+
+#compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+#compare-table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--white);
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--navy-700);
+  text-align: left;
+  padding: 0 16px 14px;
+  border-bottom: 2px solid var(--navy-100);
+  white-space: nowrap;
+}
+
+#compare-table thead th:first-child { color: var(--ink-muted); }
+
+#compare-table thead .th-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 7px;
+}
+
+#compare-table tbody td {
+  padding: 12px 16px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--navy-100);
+  color: var(--navy-900);
+  line-height: 1.45;
+}
+
+#compare-table tbody td.row-label {
+  font-weight: 700;
+  color: var(--navy-700);
+  width: 168px;
+  min-width: 168px;
+}
+
+#compare-table tbody tr:nth-child(even) td { background: var(--paper); }
+
+#compare-table tbody td.is-guardium {
+  background: rgba(245, 166, 35, 0.08);
+  font-weight: 600;
+}
+#compare-table tbody tr:nth-child(even) td.is-guardium { background: rgba(245, 166, 35, 0.13); }
+
+/* ---------- Detail side panel (Arena scene) ---------- */
+
+#detail-panel {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 320px;
+  background: var(--white);
+  border: 1px solid var(--navy-100);
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(11, 37, 69, 0.14);
+  padding: 18px 20px;
+  z-index: 40;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+#detail-panel.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#detail-panel .eyebrow {
+  color: var(--orange-600);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+
+#detail-panel h4 {
+  margin: 0 0 8px;
+  color: var(--navy-900);
+  font-size: 16px;
+}
+
+#detail-panel p {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* ---------- Loader ---------- */
+
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  z-index: 100;
+  transition: opacity 0.4s ease;
+}
+
+#loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#loader .ring {
+  width: 34px; height: 34px;
+  border: 3px solid var(--navy-100);
+  border-top-color: var(--orange-500);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+#loader .label {
+  color: var(--ink-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- Modal (mermaid) ---------- */
+
+#modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 37, 69, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+#modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#modal-box {
+  background: var(--white);
+  border-radius: 14px;
+  width: min(1180px, 95vw);
+  max-height: 92vh;
+  overflow-y: auto;
+  padding: 32px 36px 30px;
+  box-shadow: 0 24px 60px rgba(11, 37, 69, 0.25);
+  transform: translateY(8px) scale(0.98);
+  transition: transform 0.25s ease;
+  position: relative;
+}
+
+#modal-overlay.open #modal-box {
+  transform: translateY(0) scale(1);
+}
+
+#modal-box .modal-eyebrow {
+  color: var(--orange-600);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 4px;
+}
+
+#modal-box h3 {
+  margin: 0 0 16px;
+  color: var(--navy-900);
+  font-size: 20px;
+}
+
+#modal-close {
+  position: absolute;
+  top: 18px; right: 20px;
+  border: none;
+  background: var(--paper);
+  color: var(--navy-700);
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+#modal-close:hover { background: var(--navy-100); }
+
+#modal-mermaid {
+  background: var(--paper);
+  border: 1px solid var(--navy-100);
+  border-radius: 10px;
+  padding: 30px;
+  margin-bottom: 14px;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+#modal-mermaid svg { max-width: 100%; width: 100%; height: auto; min-height: 320px; }
+
+/* Animated-in mermaid nodes/edges: staggered fade-in on render, plus a
+   marching-ants flow on edges to suggest live traffic.
+   NOTE: nodes are positioned by mermaid via an SVG transform="translate()"
+   attribute. A CSS `transform` on the same element overrides that
+   attribute outright (CSS wins over presentation attributes), collapsing
+   every node to the origin. So this animates opacity only, never transform. */
+#modal-mermaid .node {
+  opacity: 0;
+  animation: va-node-in 0.45s ease forwards;
+}
+
+#modal-mermaid .edgePath path,
+#modal-mermaid .edgePaths path,
+#modal-mermaid .flowchart-link {
+  stroke-dasharray: 6 5;
+  opacity: 0;
+  animation: va-edge-in 0.4s ease forwards, va-edge-flow 1.4s linear 0.4s infinite;
+}
+
+@keyframes va-node-in {
+  to { opacity: 1; }
+}
+
+@keyframes va-edge-in {
+  to { opacity: 1; }
+}
+
+@keyframes va-edge-flow {
+  to { stroke-dashoffset: -55; }
+}
+
+#modal-caption {
+  color: var(--ink-muted);
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0;
+}

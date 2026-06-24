@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Guardium Vendor Arena · Identity &amp; Access Governance</title>
+<link rel="stylesheet" href="css/theme.css" />
+</head>
+<body>
+
+  <div id="topbar">
+    <span>Identity &amp; Access Governance · Management Briefing</span>
+    <span class="dots"><span></span><span></span><span></span></span>
+  </div>
+
+  <header id="topnav">
+    <div class="wordmark" data-nav="Arena">
+      <svg class="mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 2 L28 7 V15 C28 23 22 28 16 30 C10 28 4 23 4 15 V7 Z" fill="#0B2545"/>
+        <path d="M16 6 L24 9.5 V15.2 C24 20.6 20.5 24.2 16 25.8 C11.5 24.2 8 20.6 8 15.2 V9.5 Z" fill="#ffffff" opacity="0.08"/>
+        <circle cx="16" cy="14" r="3.4" fill="#F5A623"/>
+        <rect x="14.6" y="16.6" width="2.8" height="6.4" rx="1.3" fill="#F5A623"/>
+      </svg>
+      <span class="text">
+        <strong>Guardium Vendor Arena</strong>
+        <small>gic-iam vs. the market</small>
+      </span>
+    </div>
+    <nav>
+      <button data-nav="Arena">Arena</button>
+      <button data-nav="Scorecard">Scorecard</button>
+      <button data-nav="Briefing">Briefing</button>
+    </nav>
+    <button class="cta" data-nav="Scorecard">View Scorecard →</button>
+  </header>
+
+  <div id="compare-toolbar">
+    <div class="filter-group">
+      <span class="tap-indicator" aria-hidden="true"><span class="tap-dot"></span><span class="tap-ring"></span></span>
+      <span class="ft-label">Click a vendor to compare it against Guardium:</span>
+      <div id="compare-filters"></div>
+    </div>
+    <div id="compare-view-switch" class="view-switch">
+      <button data-view="table" class="active">Table</button>
+      <button data-view="radar">Radar</button>
+      <button data-view="bars">Bars</button>
+    </div>
+  </div>
+
+  <div id="game-container">
+    <div id="compare-table-wrap" class="visible">
+      <table id="compare-table"></table>
+    </div>
+  </div>
+
+  <div id="detail-panel">
+    <p class="eyebrow">Category detail</p>
+    <h4 id="detail-title"></h4>
+    <p id="detail-body"></p>
+  </div>
+
+  <div id="loader">
+    <div class="ring"></div>
+    <div class="label">Loading Guardium Vendor Arena&hellip;</div>
+  </div>
+
+  <div id="modal-overlay">
+    <div id="modal-box">
+      <button id="modal-close" aria-label="Close">&times;</button>
+      <p class="modal-eyebrow">How it works</p>
+      <h3 id="modal-title"></h3>
+      <div id="modal-mermaid"></div>
+      <p id="modal-caption"></p>
+    </div>
+  </div>
+
+  <script src="libs/phaser.min.js"></script>
+  <script src="libs/mermaid.min.js"></script>
+
+  <script src="src/data/content.js"></script>
+  <script src="src/ui/modal.js"></script>
+  <script src="src/ui/nav.js"></script>
+  <script src="src/ui/chrome.js"></script>
+  <script src="src/ui/compare.js"></script>
+
+  <script src="src/scenes/BootScene.js"></script>
+  <script src="src/scenes/ArenaScene.js"></script>
+  <script src="src/scenes/ScorecardScene.js"></script>
+  <script src="src/scenes/BriefingScene.js"></script>
+
+  <script src="src/main.js"></script>
+</body>
+</html>

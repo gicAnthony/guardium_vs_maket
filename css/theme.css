@@ -41,7 +41,7 @@ html, body {
   z-index: 51;
   font-size: 11px;
   letter-spacing: 0.06em;
-  color: rgba(4, 40, 155, 0.75);
+  color: rgba(255, 255, 255, 0.75);
   text-transform: uppercase;
 }
 
@@ -359,7 +359,7 @@ body.has-toolbar #game-container {
   position: sticky;
   top: 43px;
   z-index: 1;
-  background: var(--navy-900);
+  background: var(--navy-100);
   color: var(--white);
   border-bottom: none;
   padding: 9px 16px;
@@ -371,7 +371,7 @@ body.has-toolbar #game-container {
 
 #compare-table tbody td.row-label {
   font-weight: 700;
-  color: var(--navy-700);
+  color: var(--navy-100);
   width: 168px;
   min-width: 168px;
 }

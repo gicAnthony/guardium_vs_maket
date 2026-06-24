@@ -355,6 +355,20 @@ body.has-toolbar #game-container {
   line-height: 1.45;
 }
 
+#compare-table tbody tr.section-row td {
+  position: sticky;
+  top: 43px;
+  z-index: 1;
+  background: var(--navy-900);
+  color: var(--white);
+  border-bottom: none;
+  padding: 9px 16px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 #compare-table tbody td.row-label {
   font-weight: 700;
   color: var(--navy-700);
@@ -369,6 +383,67 @@ body.has-toolbar #game-container {
   font-weight: 600;
 }
 #compare-table tbody tr:nth-child(even) td.is-guardium { background: rgba(245, 166, 35, 0.13); }
+
+#compare-table tbody tr.section-row + tr td {
+  border-top: none;
+}
+
+#compare-evidence {
+  margin-top: 34px;
+  border-top: 2px solid var(--navy-100);
+  padding-top: 20px;
+}
+
+.evidence-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.evidence-head span {
+  color: var(--navy-900);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.evidence-head small {
+  color: var(--ink-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.evidence-grid figure {
+  margin: 0;
+  border: 1px solid var(--navy-100);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.evidence-grid img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top left;
+  background: #111;
+}
+
+.evidence-grid figcaption {
+  padding: 9px 11px 10px;
+  color: var(--ink-muted);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+}
 
 /* ---------- Detail side panel (Arena scene) ---------- */
 

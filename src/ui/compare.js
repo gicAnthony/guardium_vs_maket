@@ -59,7 +59,7 @@ window.VA_COMPARE = (function () {
   }
 
   function renderTable() {
-    const rows = content.TABLE_ROWS;
+    const sections = content.FEATURE_SECTIONS || [{ title: "", rows: content.TABLE_ROWS }];
     const cols = [guardium, ...competitors.filter((v) => selected.has(v.key))];
     const table = document.getElementById("compare-table");
 
@@ -67,19 +67,39 @@ window.VA_COMPARE = (function () {
       '<th><span class="th-dot" style="background:' + v.colorHex + '"></span>' + v.name + "</th>"
     ).join("") + "</tr></thead>";
 
-    const tbody = "<tbody>" + rows.map((r) =>
-      "<tr><td class=\"row-label\">" + r.label + "</td>" +
-      cols.map((v) => "<td class=\"" + (v.pinned ? "is-guardium" : "") + "\">" + r[v.key] + "</td>").join("") +
-      "</tr>"
-    ).join("") + "</tbody>";
+    const tbody = "<tbody>" + sections.map((section) => {
+      const sectionRow = section.title
+        ? '<tr class="section-row"><td colspan="' + (cols.length + 1) + '">' + section.title + "</td></tr>"
+        : "";
+      const rows = section.rows.map((r) =>
+        "<tr><td class=\"row-label\">" + r.label + "</td>" +
+        cols.map((v) => "<td class=\"" + (v.pinned ? "is-guardium" : "") + "\">" + r[v.key] + "</td>").join("") +
+        "</tr>"
+      ).join("");
+      return sectionRow + rows;
+    }).join("") + "</tbody>";
 
     table.innerHTML = thead + tbody;
+  }
+
+  function renderEvidence() {
+    const wrap = document.getElementById("compare-evidence");
+    if (!wrap || !content.EVIDENCE_SCREENSHOTS) return;
+
+    wrap.innerHTML =
+      '<div class="evidence-head"><span>Source captures</span><small>Guardium vs Descope feature notes from /screenshots</small></div>' +
+      '<div class="evidence-grid">' +
+      content.EVIDENCE_SCREENSHOTS.map((shot) =>
+        '<figure><img src="' + shot.src + '" alt="' + shot.alt + '" loading="lazy" /><figcaption>' + shot.caption + "</figcaption></figure>"
+      ).join("") +
+      "</div>";
   }
 
   function show() {
     document.body.classList.add("has-toolbar");
     document.getElementById("compare-table-wrap").classList.toggle("visible", viewMode === "table");
     renderTable();
+    renderEvidence();
   }
 
   function hide() {
@@ -94,6 +114,7 @@ window.VA_COMPARE = (function () {
 
   buildChips();
   buildViewSwitch();
+  renderEvidence();
 
   return {
     show,

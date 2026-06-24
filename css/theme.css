@@ -308,7 +308,7 @@ body.has-toolbar #game-container {
 #compare-table-wrap {
   position: absolute;
   inset: 0;
-  background: var(--white);
+  background: var(--navy-100);
   z-index: 20;
   overflow: auto;
   padding: 28px 36px 40px;
